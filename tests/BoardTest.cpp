@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "GameOfLifeService.hpp"
+#include "Board.hpp"
 
 TEST(BoardTest, TestGetWidthMethod)
 {

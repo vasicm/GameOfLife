@@ -1,12 +1,12 @@
 #pragma once
 
-#include "GameOfLife.hpp"
+#include <unistd.h>
 
-
+#include <filesystem>
 #include <iostream>
 #include <string>
-#include <filesystem>
-#include <unistd.h>
+
+#include "GameOfLife.hpp"
 
 using std::filesystem::current_path;
 

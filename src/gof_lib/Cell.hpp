@@ -1,11 +1,17 @@
 #pragma once
 #include <string>
 
+static const std::string ACTIVE_STRING = "x";
+static const std::string INACTIVE_STRING = "_";
+
+// enum class Cell {
+//     Active,
+//     Inactive
+// };
+
 class Cell {
  private:
   bool value;
-  const std::string ACTIVE_STRING = "x";
-  const std::string INACTIVE_STRING = "_";
 
  public:
   Cell() { value = false; }
@@ -14,8 +20,9 @@ class Cell {
 
   bool isActive() { return value; };
 
-  std::string toString() const {
-    return value ? ACTIVE_STRING : INACTIVE_STRING;
+  std::string toString(std::string active = "1",
+                       std::string inactive = "0") const {
+    return value ? active : inactive;
   }
 
   inline Cell& operator=(const Cell& rhs) {

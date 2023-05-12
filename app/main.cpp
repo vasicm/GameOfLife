@@ -3,16 +3,21 @@
 
 #include "GameOfLifeService.hpp"
 
+#include <spdlog/spdlog.h>
+#include <pngwriter.h>
+#include <string>
+
 int main(int argc, char* argv[]) {
-  std::cout << std::endl << argc << std::endl;
-  std::cout << argv[0] << std::endl;
+    std::shared_ptr<GameOfLife> gameOfLife;
+    GameOfLifeService service;
 
-  if (argc == 2) {
-    std::string str = argv[1];
-    std::cout << str << std::endl;
-  }
-  GameOfLifeService service;
-  service.executeSimulation();
-
-  return 0;
+    if (argc == 2) {
+        std::string str = argv[1];
+        gameOfLife = service.GetFromFile(str);
+    }
+    else {
+        gameOfLife = service.GetFromStdIn();
+    }
+    service.executeSimulation(gameOfLife);
+    return 0;
 }

@@ -18,19 +18,19 @@ class GameOfLifeService {
   std::shared_ptr<GameOfLife> GetFromStdIn() {
     std::cout << "Enter width: ";
     size_t width = 50;
-    // cin >> width;
+    std::cin >> width;
 
     std::cout << "Enter height: ";
     size_t height = 20;
-    // cin >> height;
+    std::cin >> height;
 
     std::cout << "Number of generations: ";
     int genNumber = 10;
-    // cin >> genNumber;
+    std::cin >> genNumber;
 
     std::cout << "Time increment in ms: ";
     int timeIncrementInMs = 1000;
-    // cin >> timeIncrementInMs;
+    std::cin >> timeIncrementInMs;
     std::cout << std::endl;
     std::shared_ptr<GameOfLifeLoader> loader =
         std::make_shared<RandomValuesGameOfLifeLoader>(width, height, genNumber,
@@ -47,26 +47,26 @@ class GameOfLifeService {
   }
 
   void executeInitialSimulation(std::shared_ptr<GameOfLife> gameOfLife) {
-    std::cout << gameOfLife->getCurrentBoardState()->toString() << std::endl;
+    printGameOfLife(*gameOfLife);
     for (int i = 0; i < gameOfLife->getInitialNumberOfGenerations(); i++) {
       std::this_thread::sleep_for(
           std::chrono::milliseconds(gameOfLife->getTimeIncrementInMs()));
       gameOfLife->goForward();
-      std::cout << gameOfLife->getCurrentBoardState()->toString() << std::endl
-                << std::endl;
+      printGameOfLife(*gameOfLife);
+      saveStateToPng(*gameOfLife);
     }
   }
 
   static void goBack(GameOfLife& gameOfLife) {
     std::cout << "Choosed: 'Go back one generation'" << std::endl;
     gameOfLife.goBack();
-    std::cout << gameOfLife.getCurrentBoardState()->toString() << std::endl;
+    printGameOfLife(gameOfLife);
   }
 
   static void goForward(GameOfLife& gameOfLife) {
     std::cout << "Choosed: 'Go forward one generation'" << std::endl;
     gameOfLife.goForward();
-    std::cout << gameOfLife.getCurrentBoardState()->toString() << std::endl;
+    printGameOfLife(gameOfLife);
   }
 
   static void saveStateToFile(GameOfLife& gameOfLife) {
@@ -77,6 +77,11 @@ class GameOfLifeService {
     GameOfLifeFileExporter exporter{filename};
     exporter.exportState(gameOfLife);
     std::cout << "State exported to file: " << filename << std::endl;
+  }
+
+  static void printGameOfLife(GameOfLife& gameOfLife) {
+    std::cout << gameOfLife.getCurrentBoardState()->toString("x", "-")
+              << std::endl;
   }
 
   int getInput() {
@@ -112,11 +117,14 @@ class GameOfLifeService {
     }
   }
 
-  void executeSimulation() {
-    // auto GameOfLife = GetFromStdIn();
-    // TODO: temporary solution
-    auto gameOfLife = GetFromFile("/home/vasic/Documents/CppPractice/repo/GameOfLife/101.txt");
+  static void saveStateToPng(GameOfLife& gameOfLife) {
+    std::ostringstream filename;
+    filename << "gen" << gameOfLife.getCurrentNumberOfGenerations() << ".png";
+    GameOfLifePngExporter pngExporter{filename.str(), 20};
+    pngExporter.exportState(gameOfLife);
+  }
 
+  void executeSimulation(std::shared_ptr<GameOfLife> gameOfLife) {
     executeInitialSimulation(gameOfLife);
 
     auto actions = getActions();
@@ -126,6 +134,7 @@ class GameOfLifeService {
       displayMainMenu();
       option = getInput();
       executeAction(actions, option, *gameOfLife);
+      saveStateToPng(*gameOfLife);
     } while (option != 4);
   }
 };

@@ -32,6 +32,20 @@ if(NOT googletest_POPULATED)
   add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BUILD_DIR})
 endif()
 
+FetchContent_Declare(
+    SPDlog
+    GIT_REPOSITORY https://github.com/gabime/spdlog
+    GIT_TAG v1.11.0
+    GIT_SHALLOW TRUE)
+FetchContent_MakeAvailable(SPDlog)
+
+FetchContent_Declare(
+    PNGwriter
+    GIT_REPOSITORY https://github.com/pngwriter/pngwriter
+    GIT_TAG 0.7.0
+    GIT_SHALLOW TRUE)
+FetchContent_MakeAvailable(PNGwriter)
+
 add_subdirectory(src)
 #if (COMPILE_EXECUTABLE)
 add_subdirectory(app)
