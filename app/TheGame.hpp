@@ -23,11 +23,14 @@ class TheGame {
   void executeInitialSimulation(std::shared_ptr<GameOfLife> gameOfLife) {
     user_interface->ShowBoard(gameOfLife->getCurrentBoardState());
     for (int i = 0; i < gameOfLife->getInitialNumberOfGenerations(); i++) {
-      std::this_thread::sleep_for(
-          std::chrono::milliseconds(gameOfLife->getTimeIncrementInMs()));
+      auto begin = std::chrono::system_clock::now();
+      auto target_time = begin + std::chrono::milliseconds(gameOfLife->getTimeIncrementInMs());
+
       gameOfLife->goForward();
       user_interface->ShowBoard(gameOfLife->getCurrentBoardState());
       saveStateToPng(gameOfLife);
+
+      std::this_thread::sleep_until(target_time);
     }
   }
 
