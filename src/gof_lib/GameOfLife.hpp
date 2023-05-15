@@ -1,7 +1,7 @@
 #pragma once
 
 #include "core/Board.hpp"
-#include "PlayingBoardMemento.hpp"
+#include "BoardMemento.hpp"
 
 class GameOfLife {
  private:
@@ -9,7 +9,7 @@ class GameOfLife {
   int m_currentGeneration = 0;
   int m_initialNumberOfGenerations;
   int m_timeIncrementInMs;
-  PlayingBoardMemento m_memento;
+  BoardMemento m_memento;
 
  public:
   GameOfLife(std::shared_ptr<Board> currentBoardState,

@@ -1,9 +1,9 @@
 add_library(${LIBRARY_NAME} STATIC
 core/Board.cpp core/Cell.hpp
 GameOfLife.cpp
-exporter/GameOfLifeFileExporter.hpp exporter/GameOfLifePngExporter.hpp
-PlayingBoardMemento.hpp
-loader/GameOfLifeFromFileLoader.hpp loader/RandomValuesGameOfLifeLoader.hpp)
+exporter/GameOfLifeFileExporter.cpp exporter/GameOfLifePngExporter.cpp
+BoardMemento.cpp
+loader/GameOfLifeFromFileLoader.cpp loader/RandomValuesGameOfLifeLoader.cpp)
 
 target_include_directories(${LIBRARY_NAME} PUBLIC "./")
 

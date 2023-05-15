@@ -1,4 +1,5 @@
 #include "GameOfLife.hpp"
+#include "BoardMemento.hpp"
 
 GameOfLife::GameOfLife(std::shared_ptr<Board> currentBoardState,
                        int nitialNumberOfGenerations, int timeIncrementInMs)
