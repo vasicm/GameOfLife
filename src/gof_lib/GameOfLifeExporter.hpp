@@ -16,17 +16,17 @@ class GameOfLifeFileExporter {
  public:
   GameOfLifeFileExporter(std::string filename) : m_filename(filename) {}
 
-  void exportState(GameOfLife const& sim) {
+  void exportState(const std::shared_ptr<GameOfLife> &gameOfLife) {
     // Create and open a text file
     std::ofstream MyFile(m_filename);
 
-    MyFile << sim.getCurrentBoardState()->getWidth() << " "
-           << sim.getCurrentBoardState()->getHeight() << std::endl;
+    MyFile << gameOfLife->getCurrentBoardState()->getWidth() << " "
+           << gameOfLife->getCurrentBoardState()->getHeight() << std::endl;
 
-    MyFile << sim.getInitialNumberOfGenerations() << " "
-           << sim.getTimeIncrementInMs() << std::endl;
+    MyFile << gameOfLife->getInitialNumberOfGenerations() << " "
+           << gameOfLife->getTimeIncrementInMs() << std::endl;
     // Write to the file
-    MyFile << sim.getCurrentBoardState()->toString("1", "0") << std::endl;
+    MyFile << gameOfLife->getCurrentBoardState()->toString("1", "0") << std::endl;
 
     // Close the file
     MyFile.close();
@@ -41,8 +41,8 @@ class GameOfLifePngExporter {
   GameOfLifePngExporter(std::string filepath, int cellsize)
       : m_filepath(filepath), m_cellsize(cellsize) {}
 
-  void exportState(GameOfLife const& gof) {
-    auto board = gof.getCurrentBoardState();
+  void exportState(const std::shared_ptr<GameOfLife>& gof) {
+    auto board = gof->getCurrentBoardState();
 
     int width = m_cellsize * board->getWidth();
     int height = m_cellsize * board->getHeight();

@@ -6,7 +6,7 @@
 class GameOfLife {
  private:
   std::shared_ptr<Board> m_currentBoardState;
-  int m_currentNumberOfGenerations = 0;
+  int m_currentGeneration = 0;
   int m_initialNumberOfGenerations;
   int m_timeIncrementInMs;
   PlayingBoardMemento m_memento;

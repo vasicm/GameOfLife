@@ -15,7 +15,7 @@ int GameOfLife::getInitialNumberOfGenerations() const {
 }
 
 int GameOfLife::getCurrentNumberOfGenerations() const {
-  return m_currentNumberOfGenerations;
+  return m_currentGeneration;
 }
 
 int GameOfLife::getTimeIncrementInMs() const { return m_timeIncrementInMs; }
@@ -69,13 +69,13 @@ void GameOfLife::goForward() {
 
   m_memento.saveState(m_currentBoardState);
 
-  m_currentNumberOfGenerations++;
+  m_currentGeneration++;
   m_currentBoardState = newBoard;
 }
 
 void GameOfLife::goBack() {
-  if (m_currentNumberOfGenerations) {
+  if (m_currentGeneration) {
     m_currentBoardState = m_memento.undo();
-    m_currentNumberOfGenerations--;
+    m_currentGeneration--;
   }
 }
