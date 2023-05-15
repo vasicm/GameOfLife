@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "Board.hpp"
+#include "core/Board.hpp"
 #include "InputOption.hpp"
 
 class UserInterface {

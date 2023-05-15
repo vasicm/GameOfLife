@@ -2,7 +2,7 @@
 #include <string>
 
 #include "TheGame.hpp"
-#include "StdUserInterface.hpp"
+#include "user_interface/StdUserInterface.hpp"
 #include "GameOfLifeFactory.hpp"
 
 #include <spdlog/spdlog.h>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Board.hpp"
+#include "core/Board.hpp"
 #include "PlayingBoardMemento.hpp"
 
 class GameOfLife {

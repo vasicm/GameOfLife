@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "Board.hpp"
+#include "core/Board.hpp"
 
 class PlayingBoardMemento {
  private:

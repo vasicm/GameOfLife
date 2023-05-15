@@ -9,9 +9,10 @@
 #include <vector>
 
 #include "GameOfLife.hpp"
-#include "GameOfLifeExporter.hpp"
-#include "UserInterface.hpp"
-#include "InputOption.hpp"
+#include "exporter/GameOfLifeFileExporter.hpp"
+#include "exporter/GameOfLifePngExporter.hpp"
+#include "user_interface/UserInterface.hpp"
+#include "user_interface/InputOption.hpp"
 
 class TheGame {
  private:

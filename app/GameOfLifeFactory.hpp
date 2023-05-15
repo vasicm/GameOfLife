@@ -1,6 +1,7 @@
-#include "UserInterface.hpp"
+#include "user_interface/UserInterface.hpp"
 #include "GameOfLife.hpp"
-#include "GameOfLifeLoader.hpp"
+#include "loader/RandomValuesGameOfLifeLoader.hpp"
+#include "loader/GameOfLifeFromFileLoader.hpp"
 
 class GameOfLifeFactory {
  private:
