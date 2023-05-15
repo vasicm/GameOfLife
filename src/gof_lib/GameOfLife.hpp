@@ -18,8 +18,8 @@ class GameOfLife {
   int getInitialNumberOfGenerations() const;
   int getCurrentNumberOfGenerations() const;
   int getTimeIncrementInMs() const;
-  bool CheckCell(int i, int j);
-  int ActiveNeighborCount(int x, int y);
+  Cell CheckCell(size_t i, size_t j);
+  int ActiveNeighborCount(size_t x, size_t y);
   void goForward();
   void goBack();
 };

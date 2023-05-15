@@ -11,5 +11,5 @@
 using std::filesystem::current_path;
 
 struct GameOfLifeLoader {
-  virtual std::shared_ptr<GameOfLife> create() = 0;
+ virtual std::shared_ptr<GameOfLife> create() = 0;
 };

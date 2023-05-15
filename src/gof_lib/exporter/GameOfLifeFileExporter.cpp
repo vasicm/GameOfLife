@@ -4,16 +4,16 @@
 
   void GameOfLifeFileExporter::exportState(const std::shared_ptr<GameOfLife> &gameOfLife) {
     // Create and open a text file
-    std::ofstream MyFile(m_filename);
+    std::ofstream outFile(m_filename);
 
-    MyFile << gameOfLife->getCurrentBoardState()->getWidth() << " "
-           << gameOfLife->getCurrentBoardState()->getHeight() << std::endl;
+    outFile << gameOfLife->getCurrentBoardState()->getWidth() << " "
+            << gameOfLife->getCurrentBoardState()->getHeight() << std::endl;
 
-    MyFile << gameOfLife->getInitialNumberOfGenerations() << " "
-           << gameOfLife->getTimeIncrementInMs() << std::endl;
+    outFile << gameOfLife->getInitialNumberOfGenerations() << " "
+            << gameOfLife->getTimeIncrementInMs() << std::endl;
     // Write to the file
-    MyFile << gameOfLife->getCurrentBoardState()->toString("1", "0") << std::endl;
+    outFile << gameOfLife->getCurrentBoardState()->toString("1", "0") << std::endl;
 
     // Close the file
-    MyFile.close();
+    outFile.close();
   }

@@ -14,12 +14,12 @@
     pngwriter flag{width, height, 0, m_filepath.data()};
     for (size_t i = 0; i < board->getHeight(); i++) {
       for (size_t j = 0; j < board->getWidth(); j++) {
-        auto cell = (*board)(i, j);
+        auto cell = (*board)[{i, j}];
 
         int positionX = j * m_cellsize;
         int positionY = i * m_cellsize;
 
-        if (cell.isActive()) {
+        if (cell == Cell::ALIVE) {
           flag.filledsquare(positionX, positionY, positionX + m_cellsize - 2,
                             positionY + m_cellsize - 2, 65535 / 3, 65535 / 2,
                             65535);

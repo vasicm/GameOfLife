@@ -8,6 +8,7 @@
 
 class BoardMemento {
  private:
+ // REVIEW: consider using stack
   std::vector<std::shared_ptr<Board>> m_changes;
 
  public:

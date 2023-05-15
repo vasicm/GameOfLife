@@ -11,18 +11,28 @@
 
 #include "Cell.hpp"
 
+#define DEFAULT_ALIVE_CELL "1"
+#define DEFAULT_DEAD_CELL "0"
+
 class Board {
  private:
   std::vector<std::vector<Cell>> m_twoDVector;
   size_t m_width;
   size_t m_height;
 
+  struct Index
+  {
+    size_t row;
+    size_t col;
+  };
+  bool wrongLocation(int, int) const;
  public:
   Board(size_t width, size_t height);
   size_t getWidth() const;
   size_t getHeight() const;
-  Cell& operator()(size_t row, size_t col);
-  inline const Cell& operator()(size_t row, size_t col) const;
-  std::string toString(std::string active = "1",
-                       std::string inactive = "0") const;
+  const Cell& operator[](const Index&) const noexcept(false);
+  Cell& operator[](const Index&) noexcept(false);
+  std::string toString(std::string alive = DEFAULT_ALIVE_CELL,
+                       std::string dead = DEFAULT_DEAD_CELL) const;
+
 };

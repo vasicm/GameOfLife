@@ -44,10 +44,12 @@ class TheGame {
         gameOfLife->goBack();
         return true;
     });
+
     actions.emplace(InputOption::GoForward, [](std::shared_ptr<GameOfLife>& gameOfLife, std::shared_ptr<UserInterface>& user_interface) {
         gameOfLife->goForward();
         return true;
     });
+
     actions.emplace(InputOption::SaveToFile, [](std::shared_ptr<GameOfLife>& gameOfLife, std::shared_ptr<UserInterface>& user_interface) {
         std::string filename = user_interface->GetFileName();
         GameOfLifeFileExporter exporter{filename};

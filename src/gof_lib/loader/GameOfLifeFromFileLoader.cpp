@@ -20,7 +20,7 @@
       std::string str;
       myfile >> str;
       for (size_t j = 0; j < board->getWidth(); j++) {
-        (*board)(i, j) = str.at(j) == '0' ? false : true;
+        (*board)[{i, j}] = (str.at(j) == '1' ? Cell::ALIVE : Cell::DEAD);
       }
     }
 
