@@ -3,17 +3,17 @@
 GameOfLifePngExporter::GameOfLifePngExporter(std::string filepath, int cellsize)
     : m_filepath(filepath), m_cellsize(cellsize) {}
 
-void GameOfLifePngExporter::exportState(
+void GameOfLifePngExporter::ExportState(
     const std::shared_ptr<GameOfLife>& gof) {
-  auto board = gof->getCurrentBoardState();
+  auto board = gof->GetCurrentBoardState();
 
-  int width = m_cellsize * board->getWidth();
-  int height = m_cellsize * board->getHeight();
+  int width = m_cellsize * board->GetWidth();
+  int height = m_cellsize * board->GetHeight();
 
   // Generate the flag
   pngwriter flag{width, height, 0, m_filepath.data()};
-  for (size_t i = 0; i < board->getHeight(); i++) {
-    for (size_t j = 0; j < board->getWidth(); j++) {
+  for (size_t i = 0; i < board->GetHeight(); i++) {
+    for (size_t j = 0; j < board->GetWidth(); j++) {
       auto cell = (*board)[{i, j}];
 
       int positionX = j * m_cellsize;

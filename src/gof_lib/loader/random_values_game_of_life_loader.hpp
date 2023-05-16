@@ -23,6 +23,6 @@ class RandomValuesGameOfLifeLoader : public GameOfLifeLoader {
  public:
   RandomValuesGameOfLifeLoader(size_t width, size_t height,
                                int numberOfGenerations, int timeIncrementInMs);
-  std::shared_ptr<GameOfLife> create() override;
+  std::shared_ptr<GameOfLife> Create() override;
   std::shared_ptr<Board> createBoard();
 };

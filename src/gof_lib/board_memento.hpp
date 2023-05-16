@@ -12,6 +12,6 @@ class BoardMemento {
   std::vector<std::shared_ptr<Board>> m_changes;
 
  public:
-  void saveState(const std::shared_ptr<Board>& board);
-  std::shared_ptr<Board> undo();
+  void SaveState(const std::shared_ptr<Board>& board);
+  std::shared_ptr<Board> Undo();
 };

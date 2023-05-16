@@ -11,5 +11,5 @@ class GameOfLifeFromFileLoader : public GameOfLifeLoader {
 
  public:
   GameOfLifeFromFileLoader(std::string fileName);
-  std::shared_ptr<GameOfLife> create() override;
+  std::shared_ptr<GameOfLife> Create() override;
 };

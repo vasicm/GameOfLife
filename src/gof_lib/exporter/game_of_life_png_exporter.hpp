@@ -13,5 +13,5 @@ class GameOfLifePngExporter {
 
  public:
   GameOfLifePngExporter(std::string filepath, int cellsize);
-  void exportState(const std::shared_ptr<GameOfLife>& gof);
+  void ExportState(const std::shared_ptr<GameOfLife>& gof);
 };

@@ -3,16 +3,16 @@
 TheGame::TheGame(std::shared_ptr<UserInterface> user_interface)
     : user_interface(user_interface) {}
 
-void TheGame::executeInitialSimulation(std::shared_ptr<GameOfLife> gameOfLife) {
-  user_interface->ShowBoard(gameOfLife->getCurrentBoardState());
-  for (int i = 0; i < gameOfLife->getInitialNumberOfGenerations(); i++) {
+void TheGame::ExecuteInitialSimulation(std::shared_ptr<GameOfLife> gameOfLife) {
+  user_interface->ShowBoard(gameOfLife->GetCurrentBoardState());
+  for (int i = 0; i < gameOfLife->GetInitialNumberOfGenerations(); i++) {
     auto begin = std::chrono::system_clock::now();
     auto target_time =
-        begin + std::chrono::milliseconds(gameOfLife->getTimeIncrementInMs());
+        begin + std::chrono::milliseconds(gameOfLife->GetTimeIncrementInMs());
 
-    gameOfLife->goForward();
-    user_interface->ShowBoard(gameOfLife->getCurrentBoardState());
-    saveStateToPng(gameOfLife);
+    gameOfLife->GoForward();
+    user_interface->ShowBoard(gameOfLife->GetCurrentBoardState());
+    SaveStateToPng(gameOfLife);
 
     std::this_thread::sleep_until(target_time);
   }
@@ -20,7 +20,7 @@ void TheGame::executeInitialSimulation(std::shared_ptr<GameOfLife> gameOfLife) {
 
 std::map<InputOption, bool (*)(std::shared_ptr<GameOfLife>& gameOfLife,
                                std::shared_ptr<UserInterface>&)>
-TheGame::getActions() {
+TheGame::GetActions() {
   std::map<InputOption, bool (*)(std::shared_ptr<GameOfLife> & gameOfLife,
                                  std::shared_ptr<UserInterface>&)>
       actions;
@@ -36,14 +36,14 @@ TheGame::getActions() {
   actions.emplace(InputOption::kGoBack,
                   [](std::shared_ptr<GameOfLife>& gameOfLife,
                      std::shared_ptr<UserInterface>& user_interface) {
-                    gameOfLife->goBack();
+                    gameOfLife->GoBack();
                     return true;
                   });
 
   actions.emplace(InputOption::kGoForward,
                   [](std::shared_ptr<GameOfLife>& gameOfLife,
                      std::shared_ptr<UserInterface>& user_interface) {
-                    gameOfLife->goForward();
+                    gameOfLife->GoForward();
                     return true;
                   });
 
@@ -52,7 +52,7 @@ TheGame::getActions() {
                      std::shared_ptr<UserInterface>& user_interface) {
                     std::string filename = user_interface->GetFileName();
                     GameOfLifeFileExporter exporter{filename};
-                    exporter.exportState(gameOfLife);
+                    exporter.ExportState(gameOfLife);
                     return true;
                   });
 
@@ -64,7 +64,7 @@ TheGame::getActions() {
   return actions;
 }
 
-bool TheGame::executeAction(
+bool TheGame::ExecuteAction(
     std::map<InputOption, bool (*)(std::shared_ptr<GameOfLife>& gameOfLife,
                                    std::shared_ptr<UserInterface>&)>
         actions,
@@ -74,28 +74,28 @@ bool TheGame::executeAction(
       action != actions.end() ? action : actions.find(InputOption::kDefault);
 
   bool value = action->second(gameOfLife, user_interface);
-  user_interface->ShowBoard(gameOfLife->getCurrentBoardState());
+  user_interface->ShowBoard(gameOfLife->GetCurrentBoardState());
 
   return value;
 }
 
-void TheGame::saveStateToPng(const std::shared_ptr<GameOfLife>& gameOfLife) {
+void TheGame::SaveStateToPng(const std::shared_ptr<GameOfLife>& gameOfLife) {
   std::ostringstream filename;
-  filename << "gen" << gameOfLife->getCurrentNumberOfGenerations() << ".png";
+  filename << "gen" << gameOfLife->GetCurrentNumberOfGenerations() << ".png";
   GameOfLifePngExporter pngExporter{filename.str(), 20};
-  pngExporter.exportState(gameOfLife);
+  pngExporter.ExportState(gameOfLife);
 }
 
-void TheGame::executeSimulation(std::shared_ptr<GameOfLife>& gameOfLife) {
-  executeInitialSimulation(gameOfLife);
+void TheGame::ExecuteSimulation(std::shared_ptr<GameOfLife>& gameOfLife) {
+  ExecuteInitialSimulation(gameOfLife);
 
-  auto actions = getActions();
+  auto actions = GetActions();
 
   InputOption option = InputOption::kQuit;
   bool continueExecution = false;
   do {
     option = user_interface->GetInputOption();
-    continueExecution = executeAction(actions, option, gameOfLife);
-    saveStateToPng(gameOfLife);
+    continueExecution = ExecuteAction(actions, option, gameOfLife);
+    SaveStateToPng(gameOfLife);
   } while (continueExecution);
 }

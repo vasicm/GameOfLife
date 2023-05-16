@@ -8,19 +8,19 @@ GameOfLife::GameOfLife(std::shared_ptr<Board> currentBoardState,
       m_initialNumberOfGenerations(nitialNumberOfGenerations),
       m_timeIncrementInMs(timeIncrementInMs) {}
 
-std::shared_ptr<Board> GameOfLife::getCurrentBoardState() const {
+std::shared_ptr<Board> GameOfLife::GetCurrentBoardState() const {
   return m_currentBoardState;
 }
 
-int GameOfLife::getInitialNumberOfGenerations() const {
+int GameOfLife::GetInitialNumberOfGenerations() const {
   return m_initialNumberOfGenerations;
 }
 
-int GameOfLife::getCurrentNumberOfGenerations() const {
+int GameOfLife::GetCurrentNumberOfGenerations() const {
   return m_currentGeneration;
 }
 
-int GameOfLife::getTimeIncrementInMs() const { return m_timeIncrementInMs; }
+int GameOfLife::GetTimeIncrementInMs() const { return m_timeIncrementInMs; }
 
 Cell GameOfLife::CheckCell(size_t i, size_t j) {
   auto activeNeighborCount = this->ActiveNeighborCount(i, j);
@@ -32,8 +32,8 @@ Cell GameOfLife::CheckCell(size_t i, size_t j) {
 
 int GameOfLife::ActiveNeighborCount(size_t x, size_t y) {
   // TODO: check types
-  size_t xMax = m_currentBoardState->getHeight() - 1;
-  size_t yMax = m_currentBoardState->getWidth() - 1;
+  size_t xMax = m_currentBoardState->GetHeight() - 1;
+  size_t yMax = m_currentBoardState->GetWidth() - 1;
 
   size_t xStart = x == 0 ? 0 : x - 1;
   size_t xEnd = std::min(x + 1, xMax);
@@ -53,9 +53,9 @@ int GameOfLife::ActiveNeighborCount(size_t x, size_t y) {
   return count;
 }
 
-void GameOfLife::goForward() {
-  size_t height = m_currentBoardState->getHeight();
-  size_t width = m_currentBoardState->getWidth();
+void GameOfLife::GoForward() {
+  size_t height = m_currentBoardState->GetHeight();
+  size_t width = m_currentBoardState->GetWidth();
 
   auto newBoard = std::make_shared<Board>(width, height);
 
@@ -67,15 +67,15 @@ void GameOfLife::goForward() {
     }
   }
 
-  m_memento.saveState(m_currentBoardState);
+  m_memento.SaveState(m_currentBoardState);
 
   m_currentGeneration++;
   m_currentBoardState = newBoard;
 }
 
-void GameOfLife::goBack() {
+void GameOfLife::GoBack() {
   if (m_currentGeneration) {
-    m_currentBoardState = m_memento.undo();
+    m_currentBoardState = m_memento.Undo();
     m_currentGeneration--;
   }
 }

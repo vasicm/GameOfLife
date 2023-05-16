@@ -10,5 +10,5 @@ class GameOfLifeFileExporter {
 
  public:
   GameOfLifeFileExporter(std::string filename);
-  void exportState(const std::shared_ptr<GameOfLife> &gameOfLife);
+  void ExportState(const std::shared_ptr<GameOfLife> &gameOfLife);
 };

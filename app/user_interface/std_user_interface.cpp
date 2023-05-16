@@ -51,7 +51,7 @@ std::string StdUserInterface::GetFileName() {
 };
 
 void StdUserInterface::ShowBoard(const std::shared_ptr<Board>& board) {
-  std::cout << board->toString("x", "-") << std::endl;
+  std::cout << board->ToString("x", "-") << std::endl;
 }
 
 void StdUserInterface::ShowErrorMessage(std::string message) {

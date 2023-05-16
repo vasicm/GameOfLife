@@ -14,12 +14,12 @@ class GameOfLife {
  public:
   GameOfLife(std::shared_ptr<Board> currentBoardState,
              int nitialNumberOfGenerations, int timeIncrementInMs);
-  std::shared_ptr<Board> getCurrentBoardState() const;
-  int getInitialNumberOfGenerations() const;
-  int getCurrentNumberOfGenerations() const;
-  int getTimeIncrementInMs() const;
+  std::shared_ptr<Board> GetCurrentBoardState() const;
+  int GetInitialNumberOfGenerations() const;
+  int GetCurrentNumberOfGenerations() const;
+  int GetTimeIncrementInMs() const;
   Cell CheckCell(size_t i, size_t j);
   int ActiveNeighborCount(size_t x, size_t y);
-  void goForward();
-  void goBack();
+  void GoForward();
+  void GoBack();
 };

@@ -24,14 +24,14 @@ class Board {
     size_t row;
     size_t col;
   };
-  bool wrongLocation(int, int) const;
+  bool WrongLocation(int, int) const;
 
  public:
   Board(size_t width, size_t height);
-  size_t getWidth() const;
-  size_t getHeight() const;
+  size_t GetWidth() const;
+  size_t GetHeight() const;
   const Cell& operator[](const Index&) const noexcept(false);
   Cell& operator[](const Index&) noexcept(false);
-  std::string toString(std::string alive = DEFAULT_ALIVE_CELL,
+  std::string ToString(std::string alive = DEFAULT_ALIVE_CELL,
                        std::string dead = DEFAULT_DEAD_CELL) const;
 };

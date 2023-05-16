@@ -1,10 +1,10 @@
 #include "board_memento.hpp"
 
-void BoardMemento::saveState(const std::shared_ptr<Board>& board) {
+void BoardMemento::SaveState(const std::shared_ptr<Board>& board) {
   m_changes.push_back(board);
 }
 
-std::shared_ptr<Board> BoardMemento::undo() {
+std::shared_ptr<Board> BoardMemento::Undo() {
   auto board = m_changes.back();
   m_changes.pop_back();
   return board;

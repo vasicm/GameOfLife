@@ -20,15 +20,15 @@ class TheGame {
 
  public:
   TheGame(std::shared_ptr<UserInterface> user_interface);
-  void executeInitialSimulation(std::shared_ptr<GameOfLife> gameOfLife);
+  void ExecuteInitialSimulation(std::shared_ptr<GameOfLife> gameOfLife);
   static std::map<InputOption, bool (*)(std::shared_ptr<GameOfLife>& gameOfLife,
                                         std::shared_ptr<UserInterface>&)>
-  getActions();
-  bool executeAction(
+  GetActions();
+  bool ExecuteAction(
       std::map<InputOption, bool (*)(std::shared_ptr<GameOfLife>& gameOfLife,
                                      std::shared_ptr<UserInterface>&)>
           actions,
       InputOption option, std::shared_ptr<GameOfLife>& gameOfLife);
-  static void saveStateToPng(const std::shared_ptr<GameOfLife>& gameOfLife);
-  void executeSimulation(std::shared_ptr<GameOfLife>& gameOfLife);
+  static void SaveStateToPng(const std::shared_ptr<GameOfLife>& gameOfLife);
+  void ExecuteSimulation(std::shared_ptr<GameOfLife>& gameOfLife);
 };
