@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string>
 
-#include "game_of_life_factory.hpp"
 #include "game.hpp"
+#include "game_of_life_factory.hpp"
 #include "user_interface/std_user_interface.hpp"
 
 int main(int argc, char* argv[]) {

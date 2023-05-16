@@ -43,7 +43,8 @@ int GameOfLife::ActiveNeighborCount(size_t x, size_t y) {
   int count = 0;
   for (size_t i = xStart; i <= xEnd; i++) {
     for (size_t j = yStart; j <= yEnd; j++) {
-      if ((*m_currentBoardState)[{i, j}] == Cell::kAlive && (i != x || j != y)) {
+      if ((*m_currentBoardState)[{i, j}] == Cell::kAlive &&
+          (i != x || j != y)) {
         count++;
       }
     }

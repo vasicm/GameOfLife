@@ -2,8 +2,8 @@
 
 #include <string>
 
-#include "input_option.hpp"
 #include "core/board.hpp"
+#include "input_option.hpp"
 
 class UserInterface {
  public:
