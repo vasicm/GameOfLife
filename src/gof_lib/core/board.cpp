@@ -33,7 +33,7 @@ std::string Board::toString(std::string alive, std::string dead) const {
 
   for (auto const& vec : m_twoDVector) {
     for (Cell const& cell : vec) {
-      ss << (cell == Cell::DEAD ? dead : alive);
+      ss << (cell == Cell::kDead ? dead : alive);
     }
 
     ss << std::endl;

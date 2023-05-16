@@ -1,9 +1,9 @@
 #pragma once
 
 enum class InputOption {
-  Default = 0,
-  GoBack = 1,
-  GoForward = 2,
-  SaveToFile = 3,
-  Quit = 4
+  kDefault = 0,
+  kGoBack = 1,
+  kGoForward = 2,
+  kSaveToFile = 3,
+  kQuit = 4
 };

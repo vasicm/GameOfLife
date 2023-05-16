@@ -24,10 +24,10 @@ int GameOfLife::getTimeIncrementInMs() const { return m_timeIncrementInMs; }
 
 Cell GameOfLife::CheckCell(size_t i, size_t j) {
   auto activeNeighborCount = this->ActiveNeighborCount(i, j);
-  bool isOldCellAlive = (*m_currentBoardState)[{i, j}] == Cell::ALIVE;
+  bool isOldCellAlive = (*m_currentBoardState)[{i, j}] == Cell::kAlive;
   bool isCellAlive = (activeNeighborCount == 3 ||
                       (isOldCellAlive && activeNeighborCount == 2));
-  return isCellAlive ? Cell::ALIVE : Cell::DEAD;
+  return isCellAlive ? Cell::kAlive : Cell::kDead;
 }
 
 int GameOfLife::ActiveNeighborCount(size_t x, size_t y) {
@@ -43,7 +43,7 @@ int GameOfLife::ActiveNeighborCount(size_t x, size_t y) {
   int count = 0;
   for (size_t i = xStart; i <= xEnd; i++) {
     for (size_t j = yStart; j <= yEnd; j++) {
-      if ((*m_currentBoardState)[{i, j}] == Cell::ALIVE && (i != x || j != y)) {
+      if ((*m_currentBoardState)[{i, j}] == Cell::kAlive && (i != x || j != y)) {
         count++;
       }
     }

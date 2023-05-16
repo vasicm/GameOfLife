@@ -1,4 +1,4 @@
 #pragma once
 #include <string>
 
-enum class Cell { DEAD, ALIVE };
+enum class Cell { kDead, kAlive };

@@ -18,7 +18,7 @@ std::shared_ptr<Board> RandomValuesGameOfLifeLoader::createBoard() {
   srand((unsigned)time(NULL));
   for (size_t i = 0; i < board->getHeight(); i++) {
     for (size_t j = 0; j < board->getWidth(); j++) {
-      (*board)[{i, j}] = (rand() % 2) == 1 ? Cell::ALIVE : Cell::DEAD;
+      (*board)[{i, j}] = (rand() % 2) == 1 ? Cell::kAlive : Cell::kDead;
     }
   }
 

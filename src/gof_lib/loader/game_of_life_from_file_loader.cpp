@@ -20,7 +20,7 @@ std::shared_ptr<GameOfLife> GameOfLifeFromFileLoader::create() {
     std::string str;
     myfile >> str;
     for (size_t j = 0; j < board->getWidth(); j++) {
-      (*board)[{i, j}] = (str.at(j) == '1' ? Cell::ALIVE : Cell::DEAD);
+      (*board)[{i, j}] = (str.at(j) == '1' ? Cell::kAlive : Cell::kDead);
     }
   }
 

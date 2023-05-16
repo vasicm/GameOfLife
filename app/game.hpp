@@ -45,28 +45,28 @@ class TheGame {
         actions;
 
     actions.emplace(
-        InputOption::Default,
+        InputOption::kDefault,
         [](std::shared_ptr<GameOfLife>& gameOfLife,
            std::shared_ptr<UserInterface>& user_interface) {
           user_interface->ShowErrorMessage("Invalid action, try again!");
           return true;
         });
 
-    actions.emplace(InputOption::GoBack,
+    actions.emplace(InputOption::kGoBack,
                     [](std::shared_ptr<GameOfLife>& gameOfLife,
                        std::shared_ptr<UserInterface>& user_interface) {
                       gameOfLife->goBack();
                       return true;
                     });
 
-    actions.emplace(InputOption::GoForward,
+    actions.emplace(InputOption::kGoForward,
                     [](std::shared_ptr<GameOfLife>& gameOfLife,
                        std::shared_ptr<UserInterface>& user_interface) {
                       gameOfLife->goForward();
                       return true;
                     });
 
-    actions.emplace(InputOption::SaveToFile,
+    actions.emplace(InputOption::kSaveToFile,
                     [](std::shared_ptr<GameOfLife>& gameOfLife,
                        std::shared_ptr<UserInterface>& user_interface) {
                       std::string filename = user_interface->GetFileName();
@@ -76,7 +76,7 @@ class TheGame {
                     });
 
     actions.emplace(
-        InputOption::Quit,
+        InputOption::kQuit,
         [](std::shared_ptr<GameOfLife>& gameOfLife,
            std::shared_ptr<UserInterface>& user_interface) { return false; });
 
@@ -90,7 +90,7 @@ class TheGame {
       InputOption option, std::shared_ptr<GameOfLife>& gameOfLife) {
     auto action = actions.find(option);
     action =
-        action != actions.end() ? action : actions.find(InputOption::Default);
+        action != actions.end() ? action : actions.find(InputOption::kDefault);
 
     bool value = action->second(gameOfLife, user_interface);
     user_interface->ShowBoard(gameOfLife->getCurrentBoardState());
@@ -110,7 +110,7 @@ class TheGame {
 
     auto actions = getActions();
 
-    InputOption option = InputOption::Quit;
+    InputOption option = InputOption::kQuit;
     bool continueExecution = false;
     do {
       option = user_interface->GetInputOption();

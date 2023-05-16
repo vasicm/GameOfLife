@@ -19,7 +19,7 @@ void GameOfLifePngExporter::exportState(
       int positionX = j * m_cellsize;
       int positionY = i * m_cellsize;
 
-      if (cell == Cell::ALIVE) {
+      if (cell == Cell::kAlive) {
         flag.filledsquare(positionX, positionY, positionX + m_cellsize - 2,
                           positionY + m_cellsize - 2, 65535 / 3, 65535 / 2,
                           65535);
