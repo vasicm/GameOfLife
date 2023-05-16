@@ -1,5 +1,6 @@
-#include "GameOfLife.hpp"
-#include "BoardMemento.hpp"
+#include "game_of_life.hpp"
+
+#include "board_memento.hpp"
 
 GameOfLife::GameOfLife(std::shared_ptr<Board> currentBoardState,
                        int nitialNumberOfGenerations, int timeIncrementInMs)
@@ -24,7 +25,8 @@ int GameOfLife::getTimeIncrementInMs() const { return m_timeIncrementInMs; }
 Cell GameOfLife::CheckCell(size_t i, size_t j) {
   auto activeNeighborCount = this->ActiveNeighborCount(i, j);
   bool isOldCellAlive = (*m_currentBoardState)[{i, j}] == Cell::ALIVE;
-  bool isCellAlive = (activeNeighborCount == 3 || (isOldCellAlive && activeNeighborCount == 2));
+  bool isCellAlive = (activeNeighborCount == 3 ||
+                      (isOldCellAlive && activeNeighborCount == 2));
   return isCellAlive ? Cell::ALIVE : Cell::DEAD;
 }
 
@@ -33,7 +35,7 @@ int GameOfLife::ActiveNeighborCount(size_t x, size_t y) {
   size_t xMax = m_currentBoardState->getHeight() - 1;
   size_t yMax = m_currentBoardState->getWidth() - 1;
 
-  size_t xStart = x == 0 ? 0 : x-1;
+  size_t xStart = x == 0 ? 0 : x - 1;
   size_t xEnd = std::min(x + 1, xMax);
   size_t yStart = y == 0 ? 0 : y - 1;
   size_t yEnd = std::min(y + 1, yMax);

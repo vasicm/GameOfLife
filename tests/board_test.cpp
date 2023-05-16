@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "core/Board.hpp"
+#include "core/board.hpp"
 
 TEST(BoardTest, TestGetWidthMethod)
 {

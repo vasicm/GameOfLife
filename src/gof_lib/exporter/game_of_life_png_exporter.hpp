@@ -4,7 +4,7 @@
 
 #include <string>
 
-#include "GameOfLife.hpp"
+#include "game_of_life.hpp"
 
 class GameOfLifePngExporter {
  private:

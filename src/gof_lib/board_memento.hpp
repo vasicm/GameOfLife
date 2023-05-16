@@ -4,11 +4,11 @@
 #include <string>
 #include <vector>
 
-#include "core/Board.hpp"
+#include "core/board.hpp"
 
 class BoardMemento {
  private:
- // REVIEW: consider using stack
+  // REVIEW: consider using stack
   std::vector<std::shared_ptr<Board>> m_changes;
 
  public:

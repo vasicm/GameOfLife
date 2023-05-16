@@ -1,7 +1,7 @@
 #pragma once
 
-#include "core/Board.hpp"
-#include "BoardMemento.hpp"
+#include "board_memento.hpp"
+#include "core/board.hpp"
 
 class GameOfLife {
  private:

@@ -8,8 +8,8 @@
 #include <iostream>
 #include <string>
 
-#include "GameOfLifeLoader.hpp"
-#include "GameOfLife.hpp"
+#include "game_of_life.hpp"
+#include "game_of_life_loader.hpp"
 
 using std::filesystem::current_path;
 

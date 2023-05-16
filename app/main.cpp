@@ -1,26 +1,24 @@
+#include <pngwriter.h>
+#include <spdlog/spdlog.h>
+
 #include <iostream>
 #include <string>
 
-#include "TheGame.hpp"
-#include "user_interface/StdUserInterface.hpp"
-#include "GameOfLifeFactory.hpp"
-
-#include <spdlog/spdlog.h>
-#include <pngwriter.h>
-#include <string>
+#include "game_of_life_factory.hpp"
+#include "game.hpp"
+#include "user_interface/std_user_interface.hpp"
 
 int main(int argc, char* argv[]) {
-    std::shared_ptr<StdUserInterface> stdUserInterface = std::make_shared<StdUserInterface>();
+  std::shared_ptr<StdUserInterface> stdUserInterface =
+      std::make_shared<StdUserInterface>();
 
-    GameOfLifeFactory factory{stdUserInterface};
+  GameOfLifeFactory factory{stdUserInterface};
 
-    TheGame service{stdUserInterface};
+  TheGame service{stdUserInterface};
 
-    std::shared_ptr<GameOfLife> gameOfLife =
-                factory
-                .GetLoader(argc == 2 ? argv[1] : "")
-                ->create();
+  std::shared_ptr<GameOfLife> gameOfLife =
+      factory.GetLoader(argc == 2 ? argv[1] : "")->create();
 
-    service.executeSimulation(gameOfLife);
-    return 0;
+  service.executeSimulation(gameOfLife);
+  return 0;
 }

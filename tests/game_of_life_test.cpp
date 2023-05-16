@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "GameOfLife.hpp"
+#include "game_of_life.hpp"
 
 TEST(GameOfLife, TestCheckCellMethod)
 {

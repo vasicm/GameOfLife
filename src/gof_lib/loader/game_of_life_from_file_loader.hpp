@@ -1,9 +1,9 @@
 #pragma once
 
-#include <string>
 #include <memory>
+#include <string>
 
-#include "GameOfLifeLoader.hpp"
+#include "game_of_life_loader.hpp"
 
 class GameOfLifeFromFileLoader : public GameOfLifeLoader {
  private:
