@@ -6,8 +6,18 @@
 
 #include "game_of_life.hpp"
 
+#define DEFAULT_MARGINE_SIZE 2
+
 // Used to export a 'board' object to a png file
 class GameOfLifePngExporter {
+ private:
+    struct Color;
+    struct Position;
+    static const Color kAliveCell;
+    static const Color kDeadCell;
+
+    // Renders one cell of the board.
+    static void RenderCell(pngwriter& flag, const Position& cell_position, const Color& color, int cell_size, int cell_margine_size = DEFAULT_MARGINE_SIZE);
  public:
 
   // Exports board to PNG file.
