@@ -2,6 +2,7 @@
 #include <spdlog/spdlog.h>
 
 #include <iostream>
+#include <regex>
 #include <string>
 
 #include "game.hpp"
@@ -16,9 +17,11 @@ int main(int argc, char* argv[]) {
 
   TheGame service{stdUserInterface};
 
+  //std::shared_ptr<GameOfLife> gameOfLife =
+  //    factory.GetLoader(argc == 2 ? argv[1] : "")->Create();
   std::shared_ptr<GameOfLife> gameOfLife =
-      factory.GetLoader(argc == 2 ? argv[1] : "")->Create();
+      factory.GetLoader("/home/vasic/Documents/CppPractice/repo/GameOfLife/files/101.txt")->Create();
 
-  service.ExecuteSimulation(gameOfLife);
+  service.Start(gameOfLife);
   return 0;
 }

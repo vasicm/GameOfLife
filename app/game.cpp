@@ -50,9 +50,13 @@ TheGame::GetActions() {
   actions.emplace(InputOption::kSaveToFile,
                   [](std::shared_ptr<GameOfLife>& gameOfLife,
                      std::shared_ptr<UserInterface>& user_interface) {
+
                     std::string filename = user_interface->GetFileName();
-                    GameOfLifeFileExporter exporter{filename};
-                    exporter.ExportState(gameOfLife);
+                    GameOfLifeFileExporter::ExportState(
+                        gameOfLife->GetCurrentBoardState(),
+                        gameOfLife->GetCurrentNumberOfGenerations(),
+                        gameOfLife->GetTimeIncrementInMs(),
+                        filename);
                     return true;
                   });
 
@@ -82,11 +86,10 @@ bool TheGame::ExecuteAction(
 void TheGame::SaveStateToPng(const std::shared_ptr<GameOfLife>& gameOfLife) {
   std::ostringstream filename;
   filename << "gen" << gameOfLife->GetCurrentNumberOfGenerations() << ".png";
-  GameOfLifePngExporter pngExporter{filename.str(), 20};
-  pngExporter.ExportState(gameOfLife);
+  GameOfLifePngExporter::ExportState(gameOfLife->GetCurrentBoardState(), filename.str(), 20);
 }
 
-void TheGame::ExecuteSimulation(std::shared_ptr<GameOfLife>& gameOfLife) {
+void TheGame::Start(std::shared_ptr<GameOfLife>& gameOfLife) {
   ExecuteInitialSimulation(gameOfLife);
 
   auto actions = GetActions();
