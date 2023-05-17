@@ -58,13 +58,13 @@ std::shared_ptr<GameOfLife> GameOfLifeFromFileLoader::Create() {
   auto board = std::make_shared<Board>(width, height);
   std::regex boardLineRegex = GetRegexForBoardLine(width);
 
-  for (size_t i = 0; i < board->GetHeight(); i++) {
+  for (size_t i = board->GetHeight(); i > 0; i--) {
     std::string str;
     is = GetLineAsStream(myfile, boardLineRegex);
     is >> str;
 
     for (size_t j = 0; j < board->GetWidth(); j++) {
-      (*board)[{i, j}] = (str.at(j) == '1' ? Cell::kAlive : Cell::kDead);
+      (*board)[{i - 1, j}] = (str.at(j) == '1' ? Cell::kAlive : Cell::kDead);
     }
   }
   ValidateIfFileReachedEnd(myfile);

@@ -5,6 +5,7 @@ TheGame::TheGame(std::shared_ptr<UserInterface> user_interface)
 
 void TheGame::ExecuteInitialSimulation(std::shared_ptr<GameOfLife> gameOfLife) {
   user_interface->ShowBoard(gameOfLife->GetCurrentBoardState());
+  SaveStateToPng(gameOfLife);
   for (int i = 0; i < gameOfLife->GetInitialNumberOfGenerations(); i++) {
     auto begin = std::chrono::system_clock::now();
     auto target_time =
