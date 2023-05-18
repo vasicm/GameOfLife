@@ -3,10 +3,12 @@
 #include "board_memento.hpp"
 
 GameOfLife::GameOfLife(std::shared_ptr<Board> currentBoardState,
-                       int nitialNumberOfGenerations, int timeIncrementInMs)
+                       int nitialNumberOfGenerations, int timeIncrementInMs,
+                       int historySize)
     : m_currentBoardState(currentBoardState),
       m_initialNumberOfGenerations(nitialNumberOfGenerations),
-      m_timeIncrementInMs(timeIncrementInMs) {}
+      m_timeIncrementInMs(timeIncrementInMs),
+      m_memento(historySize) {}
 
 std::shared_ptr<Board> GameOfLife::GetCurrentBoardState() const {
   return m_currentBoardState;
@@ -74,8 +76,6 @@ void GameOfLife::GoForward() {
 }
 
 void GameOfLife::GoBack() {
-  if (m_currentGeneration) {
-    m_currentBoardState = m_memento.Undo();
-    m_currentGeneration--;
-  }
+  m_currentBoardState = m_memento.Undo();
+  m_currentGeneration--;
 }

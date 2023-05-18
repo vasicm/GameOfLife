@@ -7,10 +7,16 @@ void StdUserInterface::DisplayMainMenu() {
   std::cout << "4. Quit" << std::endl;
 }
 
+void StdUserInterface::CleanInput() {
+  std::string dump;
+  std::getline(std::cin, dump);
+}
+
 int StdUserInterface::GetWidth() {
   std::cout << "Enter width: ";
   size_t width = 50;
   std::cin >> width;
+  CleanInput();
   return width;
 };
 
@@ -18,6 +24,7 @@ int StdUserInterface::GetHeight() {
   std::cout << "Enter height: ";
   size_t height = 20;
   std::cin >> height;
+  CleanInput();
   return height;
 };
 
@@ -25,6 +32,7 @@ int StdUserInterface::GetNumberOfGenerations() {
   std::cout << "Number of generations: ";
   int genNumber = 10;
   std::cin >> genNumber;
+  CleanInput();
   return genNumber;
 };
 
@@ -32,6 +40,7 @@ int StdUserInterface::GetTimeIncrementInMs() {
   std::cout << "Time increment in ms: ";
   int timeIncrementInMs = 1000;
   std::cin >> timeIncrementInMs;
+  CleanInput();
   return timeIncrementInMs;
 };
 
@@ -54,11 +63,7 @@ std::string StdUserInterface::GetFileName() {
   std::cout << "Enter filename: ";
   std::cin >> filename;
 
-  // After entering the string value, the following input will be an empty string.
-  // Without this logic, the following method that reads the value from the input
-  // (GetInputOption) would read the empty string and return the default value.
-  std::string dump;
-  std::getline(std::cin, dump);
+  CleanInput();
   return filename;
 };
 

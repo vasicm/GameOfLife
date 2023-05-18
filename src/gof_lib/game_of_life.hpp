@@ -3,6 +3,8 @@
 #include "board_memento.hpp"
 #include "core/board.hpp"
 
+#define DEFAULT_HISTORY_SIZE 20
+
 // Implements the rules of Conway's Game of Life and monitors the status of the game
 class GameOfLife {
  private:
@@ -21,7 +23,8 @@ class GameOfLife {
 
  public:
   GameOfLife(std::shared_ptr<Board> currentBoardState,
-             int nitialNumberOfGenerations, int timeIncrementInMs);
+             int nitialNumberOfGenerations, int timeIncrementInMs,
+             int historySize = DEFAULT_HISTORY_SIZE);
 
   // Returns the current state of the board in the game
   std::shared_ptr<Board> GetCurrentBoardState() const;
@@ -46,5 +49,5 @@ class GameOfLife {
   void GoForward();
 
   // Go one generation back.
-  void GoBack();
+  void GoBack() noexcept(false);
 };

@@ -37,9 +37,22 @@ TheGame::GetActions() {
   actions.emplace(InputOption::kGoBack,
                   [](std::shared_ptr<GameOfLife>& gameOfLife,
                      std::shared_ptr<UserInterface>& user_interface) {
-                    gameOfLife->GoBack();
-                    SaveStateToPng(gameOfLife);
-                    user_interface->ShowBoard(gameOfLife->GetCurrentBoardState(), gameOfLife->GetCurrentNumberOfGenerations());
+
+                    try
+                    {
+                      gameOfLife->GoBack();
+                      SaveStateToPng(gameOfLife);
+                      user_interface->ShowBoard(gameOfLife->GetCurrentBoardState(), gameOfLife->GetCurrentNumberOfGenerations());
+                    }
+                    catch(const std::length_error& e)
+                    {
+                        user_interface->ShowErrorMessage("It's not possible to go back");
+                    }
+                    catch(...)
+                    {
+                        user_interface->ShowErrorMessage("Intertnal error!!!");
+                    }
+
                     return true;
                   });
 

@@ -8,6 +8,12 @@ class StdUserInterface : public UserInterface {
  private:
   void DisplayMainMenu();
 
+  // Reads empty string.
+  // After reading the value, the following input will be an empty string.
+  // Without this logic, the following method that reads the value from the input
+  // can mistakenly read the empty string.
+  void CleanInput();
+
  public:
   int GetWidth();
   int GetHeight();
