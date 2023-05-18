@@ -37,9 +37,15 @@ int StdUserInterface::GetTimeIncrementInMs() {
 
 InputOption StdUserInterface::GetInputOption() {
   DisplayMainMenu();
-  int choice;
+  int choice = 4;
   std::cout << "Choose an option [default: 4]: ";
-  std::cin >> choice;
+  std::string input;
+  std::getline( std::cin, input );
+  if (!input.empty()) {
+    std::istringstream stream( input );
+    stream >> choice;
+  }
+
   return static_cast<InputOption>(choice);
 };
 
