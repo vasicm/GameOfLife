@@ -15,6 +15,6 @@ class StdUserInterface : public UserInterface {
   int GetTimeIncrementInMs();
   InputOption GetInputOption();
   std::string GetFileName();
-  void ShowBoard(const std::shared_ptr<Board>& board);
+  void ShowBoard(const std::shared_ptr<Board>& board, int generation);
   void ShowErrorMessage(std::string message);
 };

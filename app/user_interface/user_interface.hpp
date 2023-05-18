@@ -30,7 +30,7 @@ class UserInterface {
   virtual std::string GetFileName() = 0;
 
   // Shows the board to the end user
-  virtual void ShowBoard(const std::shared_ptr<Board>& board) = 0;
+  virtual void ShowBoard(const std::shared_ptr<Board>& board, int generation) = 0;
 
   // Shows an error message to the end user
   virtual void ShowErrorMessage(std::string message) = 0;

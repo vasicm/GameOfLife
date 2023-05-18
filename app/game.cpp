@@ -4,7 +4,7 @@ TheGame::TheGame(std::shared_ptr<UserInterface> user_interface)
     : user_interface(user_interface) {}
 
 void TheGame::ExecuteInitialSimulation(std::shared_ptr<GameOfLife> gameOfLife) {
-  user_interface->ShowBoard(gameOfLife->GetCurrentBoardState());
+  user_interface->ShowBoard(gameOfLife->GetCurrentBoardState(), gameOfLife->GetCurrentNumberOfGenerations());
   SaveStateToPng(gameOfLife);
   for (int i = 0; i < gameOfLife->GetInitialNumberOfGenerations(); i++) {
     auto begin = std::chrono::system_clock::now();
@@ -12,7 +12,7 @@ void TheGame::ExecuteInitialSimulation(std::shared_ptr<GameOfLife> gameOfLife) {
         begin + std::chrono::milliseconds(gameOfLife->GetTimeIncrementInMs());
 
     gameOfLife->GoForward();
-    user_interface->ShowBoard(gameOfLife->GetCurrentBoardState());
+    user_interface->ShowBoard(gameOfLife->GetCurrentBoardState(), gameOfLife->GetCurrentNumberOfGenerations());
     SaveStateToPng(gameOfLife);
 
     std::this_thread::sleep_until(target_time);
@@ -79,7 +79,6 @@ bool TheGame::ExecuteAction(
       action != actions.end() ? action : actions.find(InputOption::kDefault);
 
   bool value = action->second(gameOfLife, user_interface);
-  user_interface->ShowBoard(gameOfLife->GetCurrentBoardState());
 
   return value;
 }
@@ -100,6 +99,9 @@ void TheGame::Start(std::shared_ptr<GameOfLife>& gameOfLife) {
   do {
     option = user_interface->GetInputOption();
     continueExecution = ExecuteAction(actions, option, gameOfLife);
-    SaveStateToPng(gameOfLife);
+    if(continueExecution) {
+      SaveStateToPng(gameOfLife);
+      user_interface->ShowBoard(gameOfLife->GetCurrentBoardState(), gameOfLife->GetCurrentNumberOfGenerations());
+    }
   } while (continueExecution);
 }

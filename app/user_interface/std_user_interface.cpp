@@ -56,7 +56,8 @@ std::string StdUserInterface::GetFileName() {
   return filename;
 };
 
-void StdUserInterface::ShowBoard(const std::shared_ptr<Board>& board) {
+void StdUserInterface::ShowBoard(const std::shared_ptr<Board>& board, int generation) {
+  std::cout << "Generation: " << generation << "." << std::endl;
   std::cout << board->ToString("x", "-") << std::endl;
 }
 
