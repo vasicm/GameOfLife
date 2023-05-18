@@ -38,6 +38,8 @@ TheGame::GetActions() {
                   [](std::shared_ptr<GameOfLife>& gameOfLife,
                      std::shared_ptr<UserInterface>& user_interface) {
                     gameOfLife->GoBack();
+                    SaveStateToPng(gameOfLife);
+                    user_interface->ShowBoard(gameOfLife->GetCurrentBoardState(), gameOfLife->GetCurrentNumberOfGenerations());
                     return true;
                   });
 
@@ -45,6 +47,8 @@ TheGame::GetActions() {
                   [](std::shared_ptr<GameOfLife>& gameOfLife,
                      std::shared_ptr<UserInterface>& user_interface) {
                     gameOfLife->GoForward();
+                    SaveStateToPng(gameOfLife);
+                    user_interface->ShowBoard(gameOfLife->GetCurrentBoardState(), gameOfLife->GetCurrentNumberOfGenerations());
                     return true;
                   });
 
@@ -53,6 +57,12 @@ TheGame::GetActions() {
                      std::shared_ptr<UserInterface>& user_interface) {
 
                     std::string filename = user_interface->GetFileName();
+
+                    while(GameOfLifeFileExporter::CheckIfFileExists(filename)) {
+                        user_interface->ShowErrorMessage("The file already exists!");
+                        filename = user_interface->GetFileName();
+                    }
+
                     GameOfLifeFileExporter::ExportState(
                         gameOfLife->GetCurrentBoardState(),
                         gameOfLife->GetCurrentNumberOfGenerations(),
@@ -94,14 +104,5 @@ void TheGame::Start(std::shared_ptr<GameOfLife>& gameOfLife) {
 
   auto actions = GetActions();
 
-  InputOption option = InputOption::kQuit;
-  bool continueExecution = false;
-  do {
-    option = user_interface->GetInputOption();
-    continueExecution = ExecuteAction(actions, option, gameOfLife);
-    if(continueExecution) {
-      SaveStateToPng(gameOfLife);
-      user_interface->ShowBoard(gameOfLife->GetCurrentBoardState(), gameOfLife->GetCurrentNumberOfGenerations());
-    }
-  } while (continueExecution);
+  while (ExecuteAction(actions, user_interface->GetInputOption(), gameOfLife));
 }

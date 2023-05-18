@@ -1,4 +1,5 @@
 #include "game_of_life_file_exporter.hpp"
+#include <fstream>
 
 void GameOfLifeFileExporter::ExportState(
     const std::shared_ptr<Board> &board,
@@ -19,4 +20,16 @@ void GameOfLifeFileExporter::ExportState(
 
   // Close the file
   outFile.close();
+}
+
+bool GameOfLifeFileExporter::CheckIfFileExists(std::string file_path) {
+  std::ifstream file;
+  bool file_exists = false;
+  file.open(file_path);
+  if(file.is_open()) {
+    file_exists = true;
+    file.close();
+  }
+
+  return file_exists;
 }

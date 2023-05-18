@@ -18,7 +18,6 @@ class TheGame {
  private:
   // Instance of ‘UserInterface’ for communication with the end user.
   std::shared_ptr<UserInterface> user_interface;
-
  public:
   TheGame(std::shared_ptr<UserInterface> user_interface);
 

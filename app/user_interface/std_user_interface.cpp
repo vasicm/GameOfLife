@@ -53,6 +53,12 @@ std::string StdUserInterface::GetFileName() {
   std::string filename;
   std::cout << "Enter filename: ";
   std::cin >> filename;
+
+  // After entering the string value, the following input will be an empty string.
+  // Without this logic, the following method that reads the value from the input
+  // (GetInputOption) would read the empty string and return the default value.
+  std::string dump;
+  std::getline(std::cin, dump);
   return filename;
 };
 

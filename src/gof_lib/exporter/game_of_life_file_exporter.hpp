@@ -18,5 +18,7 @@ class GameOfLifeFileExporter {
     const std::shared_ptr<Board> &board,
     int initial_number_of_generations,
     int time_increment_in_ms,
-    std::string file_path );
+    std::string file_path);
+
+  static bool CheckIfFileExists(std::string file_path);
 };
