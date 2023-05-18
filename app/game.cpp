@@ -59,7 +59,7 @@ TheGame::GetActions() {
                     std::string filename = user_interface->GetFileName();
 
                     while(GameOfLifeFileExporter::CheckIfFileExists(filename)) {
-                        user_interface->ShowErrorMessage("The file already exists!");
+                        user_interface->ShowErrorMessage("The file already exists!!!");
                         filename = user_interface->GetFileName();
                     }
 
