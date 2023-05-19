@@ -21,6 +21,7 @@ class GameOfLife {
   // Time between generating two iterations during the game simulation
   int m_timeIncrementInMs;
 
+  void FillBoard(std::shared_ptr<Board> board, size_t start_from, size_t increment);
  public:
   GameOfLife(std::shared_ptr<Board> currentBoardState,
              int nitialNumberOfGenerations, int timeIncrementInMs,

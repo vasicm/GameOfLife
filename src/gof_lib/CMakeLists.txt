@@ -1,4 +1,5 @@
 add_library(${LIBRARY_NAME} STATIC
+performance_measurer.hpp
 core/board.cpp core/cell.hpp
 game_of_life.cpp
 exporter/game_of_life_file_exporter.cpp exporter/game_of_life_png_exporter.cpp

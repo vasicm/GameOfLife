@@ -1,6 +1,9 @@
 #include "game_of_life.hpp"
 
 #include "board_memento.hpp"
+#include "performance_measurer.hpp"
+
+#include <future>
 
 GameOfLife::GameOfLife(std::shared_ptr<Board> currentBoardState,
                        int nitialNumberOfGenerations, int timeIncrementInMs,
@@ -55,24 +58,62 @@ int GameOfLife::ActiveNeighborCount(size_t x, size_t y) {
   return count;
 }
 
+void GameOfLife::FillBoard(std::shared_ptr<Board> newBoard, size_t start_from, size_t increment) {
+  auto width =  newBoard->GetWidth();
+
+  auto count = newBoard->GetHeight() * newBoard->GetWidth();
+
+  for (size_t k = start_from; k < count; k+=increment)
+  {
+    size_t i = k / width;
+    size_t j = k % width;
+    (*newBoard)[{i, j}] = CheckCell(i, j);
+  }
+
+//   for (size_t i = 0; i < newBoard->GetHeight(); i++) {
+//     for (size_t j = 0; j < newBoard->GetWidth(); j++) {
+//       (*newBoard)[{i, j}] = CheckCell(i, j);
+//     }
+//   }
+}
+
 void GameOfLife::GoForward() {
+
   size_t height = m_currentBoardState->GetHeight();
   size_t width = m_currentBoardState->GetWidth();
 
   auto newBoard = std::make_shared<Board>(width, height);
 
-  // Providing a seed value
-  srand((unsigned)time(NULL));
-  for (size_t i = 0; i < height; i++) {
-    for (size_t j = 0; j < width; j++) {
-      (*newBoard)[{i, j}] = CheckCell(i, j);
-    }
-  }
+  PerformanceMeasurer::StarMeasuring(0);
+  auto f = std::async(&GameOfLife::FillBoard, this, newBoard, 0, 1);
+
+  f.get();
+  std::cout << "Elapsed time, one async thread:" << PerformanceMeasurer::GetElapsedTime(0)<< std::endl;
+
+  //f2.get();
+
+  PerformanceMeasurer::StarMeasuring(1);
+  auto f1 = std::async(&GameOfLife::FillBoard, this, newBoard, 0, 2);
+  auto f2 = std::async(&GameOfLife::FillBoard, this, newBoard, 1, 2);
+  f1.get();
+  f2.get();
+  std::cout << "Elapsed time, two async thread:" << PerformanceMeasurer::GetElapsedTime(1)<< std::endl;
+
+  PerformanceMeasurer::StarMeasuring(2);
+  FillBoard(newBoard, 0, 1);
+  std::cout << "Elapsed time, main thread:" << PerformanceMeasurer::GetElapsedTime(2)<< std::endl;
+//   for (size_t i = 0; i < height; i++) {
+//     for (size_t j = 0; j < width; j++) {
+//       (*newBoard)[{i, j}] = CheckCell(i, j);
+//     }
+//   }
 
   m_memento.SaveState(m_currentBoardState);
 
   m_currentGeneration++;
   m_currentBoardState = newBoard;
+
+
 }
 
 void GameOfLife::GoBack() {

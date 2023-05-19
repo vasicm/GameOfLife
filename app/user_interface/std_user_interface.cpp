@@ -68,8 +68,8 @@ std::string StdUserInterface::GetFileName() {
 };
 
 void StdUserInterface::ShowBoard(const std::shared_ptr<Board>& board, int generation) {
-  std::cout << "Generation: " << generation << "." << std::endl;
-  std::cout << board->ToString("x", "-") << std::endl;
+  //std::cout << "Generation: " << generation << "." << std::endl;
+  //std::cout << board->ToString("x", "-") << std::endl;
 }
 
 void StdUserInterface::ShowErrorMessage(std::string message) {
