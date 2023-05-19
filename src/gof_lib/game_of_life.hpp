@@ -9,22 +9,22 @@
 class GameOfLife {
  private:
   // The current state of the board in the game
-  std::shared_ptr<Board> m_currentBoardState;
+  std::shared_ptr<Board> current_board_state_;
   // The current generation/iteration of the board.
-  int m_currentGeneration = 0;
+  int current_generation_ = 0;
   // Preserves old states of the board and allows undo operation
-  BoardMemento m_memento;
+  BoardMemento memento_;
 
   // Initial number of generations which will be performed on game startup
-  int m_initialNumberOfGenerations;
+  int initial_number_of_generations_;
 
   // Time between generating two iterations during the game simulation
-  int m_timeIncrementInMs;
+  int time_increment_in_ms_;
 
  public:
-  GameOfLife(std::shared_ptr<Board> currentBoardState,
-             int nitialNumberOfGenerations, int timeIncrementInMs,
-             int historySize = DEFAULT_HISTORY_SIZE);
+  GameOfLife(std::shared_ptr<Board> current_board_state,
+             int nitial_number_of_generations, int time_increment_in_ms,
+             int history_size = DEFAULT_HISTORY_SIZE);
 
   // Returns the current state of the board in the game
   std::shared_ptr<Board> GetCurrentBoardState() const;

@@ -17,9 +17,9 @@ int main(int argc, char* argv[]) {
 
   TheGame service{stdUserInterface};
 
-   std::shared_ptr<GameOfLife> gameOfLife =
+   std::shared_ptr<GameOfLife> game_of_life =
        factory.GetLoader(argc == 2 ? argv[1] : "")->Create();
 
-  service.Start(gameOfLife);
+  service.Start(game_of_life);
   return 0;
 }

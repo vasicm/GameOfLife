@@ -17,16 +17,16 @@
 class TheGame {
  private:
   // Instance of ‘UserInterface’ for communication with the end user.
-  std::shared_ptr<UserInterface> user_interface;
+  std::shared_ptr<UserInterface> user_interface_;
  public:
   TheGame(std::shared_ptr<UserInterface> user_interface);
 
-  void ExecuteInitialSimulation(std::shared_ptr<GameOfLife> gameOfLife);
+  void ExecuteInitialSimulation(std::shared_ptr<GameOfLife> game_of_life);
 
   // The method returns a collection of all allowed actions in a map structure
   // where the 'key' is the enum value of the action,
   // and the 'value' is the lambda function that performs the appropriate action.
-  static std::map<InputOption, bool (*)(std::shared_ptr<GameOfLife>& gameOfLife,
+  static std::map<InputOption, bool (*)(std::shared_ptr<GameOfLife>& game_of_life,
                                         std::shared_ptr<UserInterface>&)>
   GetActions();
 
@@ -35,11 +35,11 @@ class TheGame {
       std::map<InputOption, bool (*)(std::shared_ptr<GameOfLife>& gameOfLife,
                                      std::shared_ptr<UserInterface>&)>
           actions,
-      InputOption option, std::shared_ptr<GameOfLife>& gameOfLife);
+      InputOption option, std::shared_ptr<GameOfLife>& game_of_life);
 
   // Generates board state to png file.
-  static void SaveStateToPng(const std::shared_ptr<GameOfLife>& gameOfLife);
+  static void SaveStateToPng(const std::shared_ptr<GameOfLife>& game_of_life);
 
   // Starts game
-  void Start(std::shared_ptr<GameOfLife>& gameOfLife);
+  void Start(std::shared_ptr<GameOfLife>& game_of_life);
 };

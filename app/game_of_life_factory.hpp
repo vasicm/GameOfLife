@@ -6,7 +6,7 @@
 class GameOfLifeFactory {
  private:
   // Instance of ‘UserInterface’ for communication with the end user.
-  std::shared_ptr<UserInterface> user_interface;
+  std::shared_ptr<UserInterface> user_interface_;
 
 
   // Returns loaders that create an instance of 'GameOfLife' based on the entered values
@@ -15,12 +15,12 @@ class GameOfLifeFactory {
 
   // Returns loaders that create an instance of 'GameOfLife' based on data in a text file,
   // which location can be specified by the argument
-  std::shared_ptr<GameOfLifeLoader> GetFromFileLoader(std::string filename);
+  std::shared_ptr<GameOfLifeLoader> GetFromFileLoader(std::string file_name);
 
  public:
   GameOfLifeFactory(std::shared_ptr<UserInterface> user_interface);
 
   // Returns loaders that create an instance of 'GameOfLife' based on data in a text file if the filename is specified.
   // Otherwise, it returns loaders that create an instance of 'GameOfLife' based on the entered values.
-  std::shared_ptr<GameOfLifeLoader> GetLoader(std::string filename);
+  std::shared_ptr<GameOfLifeLoader> GetLoader(std::string file_name);
 };

@@ -30,18 +30,18 @@ int StdUserInterface::GetHeight() {
 
 int StdUserInterface::GetNumberOfGenerations() {
   std::cout << "Number of generations: ";
-  int genNumber = 10;
-  std::cin >> genNumber;
+  int gen_number = 10;
+  std::cin >> gen_number;
   CleanInput();
-  return genNumber;
+  return gen_number;
 };
 
 int StdUserInterface::GetTimeIncrementInMs() {
   std::cout << "Time increment in ms: ";
-  int timeIncrementInMs = 1000;
-  std::cin >> timeIncrementInMs;
+  int time_increment_in_ms = 1000;
+  std::cin >> time_increment_in_ms;
   CleanInput();
-  return timeIncrementInMs;
+  return time_increment_in_ms;
 };
 
 InputOption StdUserInterface::GetInputOption() {
@@ -59,12 +59,12 @@ InputOption StdUserInterface::GetInputOption() {
 };
 
 std::string StdUserInterface::GetFileName() {
-  std::string filename;
+  std::string file_name;
   std::cout << "Enter filename: ";
-  std::cin >> filename;
+  std::cin >> file_name;
 
   CleanInput();
-  return filename;
+  return file_name;
 };
 
 void StdUserInterface::ShowBoard(const std::shared_ptr<Board>& board, int generation) {

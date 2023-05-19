@@ -13,12 +13,12 @@ class GameOfLifeFileExporter {
   //    board - Reference to a board object that needs to be exported
   //    initial_number_of_generations - Initial number of generations
   //    time_increment_in_ms - Time increment in milisecunds
-  //    file_path - a location where the board would be exported
+  //    file_name - a name of file where the board will be exported
   static void ExportState(
     const std::shared_ptr<Board> &board,
     int initial_number_of_generations,
     int time_increment_in_ms,
-    std::string file_path);
+    std::string file_name);
 
-  static bool CheckIfFileExists(std::string file_path);
+  static bool CheckIfFileExists(std::string file_name);
 };

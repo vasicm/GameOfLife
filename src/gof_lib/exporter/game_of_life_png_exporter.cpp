@@ -26,12 +26,12 @@ void GameOfLifePngExporter::RenderCell(pngwriter& flag, const Position& cell_pos
 void GameOfLifePngExporter::ExportState(
     const std::shared_ptr<Board>& board,
     std::string filepath,
-    int cellsize) {
+    int cell_size) {
 
   // Calculates the resolution of the png file.
   // The resolution depends on the number of rows and columns as well as the size of one cell.
-  int width = cellsize * board->GetWidth();
-  int height = cellsize * board->GetHeight();
+  int width = cell_size * board->GetWidth();
+  int height = cell_size * board->GetHeight();
 
   // Generate the flag
   pngwriter flag{width, height, 0, filepath.data()};
@@ -39,14 +39,14 @@ void GameOfLifePngExporter::ExportState(
     for (size_t j = 0; j < board->GetWidth(); j++) {
       auto cell = (*board)[{i, j}];
 
-      int positionX = j * cellsize;
-      int positionY = i * cellsize;
-      Position cellPosition{positionX, positionY};
+      int position_x = j * cell_size;
+      int position_y = i * cell_size;
+      Position cell_position{position_x, position_y};
 
       if (cell == Cell::kAlive) {
-        RenderCell(flag, cellPosition, kAliveCell, cellsize);
+        RenderCell(flag, cell_position, kAliveCell, cell_size);
       } else {
-        RenderCell(flag, cellPosition, kDeadCell, cellsize);
+        RenderCell(flag, cell_position, kDeadCell, cell_size);
       }
     }
   }

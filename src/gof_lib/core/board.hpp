@@ -26,11 +26,11 @@ class Board {
   };
  private:
   // Two-dimensional vector to preserve the value of the field.
-  std::vector<std::vector<Cell>> m_twoDVector;
+  std::vector<std::vector<Cell>> twoDVector_;
   // The width (number of columns) of the board.
-  size_t m_width;
+  size_t width_;
   // The height (number of rows) of the board.
-  size_t m_height;
+  size_t height_;
 
   // Check if the location on board is out of range.
   // Returns 'true' if the location is out of range;
