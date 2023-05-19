@@ -15,14 +15,7 @@
 #define DEFAULT_DEAD_CELL "0"
 
 class Board {
- private:
-  // Two-dimensional vector to preserve the value of the field.
-  std::vector<std::vector<Cell>> m_twoDVector;
-  // The width (number of columns) of the board.
-  size_t m_width;
-  // The height (number of rows) of the board.
-  size_t m_height;
-
+ protected:
   // A structure that allows more intuitive use of the operator [].
   // Example for creating an instance of Index, and using it along with operator[]:
   // Board board{10, 10};
@@ -31,6 +24,13 @@ class Board {
     size_t row;
     size_t col;
   };
+ private:
+  // Two-dimensional vector to preserve the value of the field.
+  std::vector<std::vector<Cell>> m_twoDVector;
+  // The width (number of columns) of the board.
+  size_t m_width;
+  // The height (number of rows) of the board.
+  size_t m_height;
 
   // Check if the location on board is out of range.
   // Returns 'true' if the location is out of range;
@@ -43,19 +43,19 @@ class Board {
   Board(size_t width, size_t height);
 
   // Returns the width, the number of board columns.
-  size_t GetWidth() const;
+  virtual size_t GetWidth() const;
 
   // Returns the height, the number of board rows.
-  size_t GetHeight() const;
+  virtual size_t GetHeight() const;
 
   // Overloaded operator [], to access the fields on board.
-  const Cell& operator[](const Index&) const noexcept(false);
+  virtual const Cell& operator[](const Index&) const noexcept(false);
 
   // Overloaded operator [], to access the fields on board.
   // Example:
   // Board board{10, 10};
   // board[{i, j}] = Cell::kAlive;
-  Cell& operator[](const Index&) noexcept(false);
+  virtual Cell& operator[](const Index&) noexcept(false);
 
   // Returns the string representation of the board
   // Input values:
